@@ -4,18 +4,18 @@
 navegador, contra **Tactical Calendar** (staging). Forma parte de Ivan QA Lab: la web lanza cada
 suite en GitHub Actions y muestra resultados y capturas.
 
-Cubre las suites con más reglas de negocio, escritas para que las lea alguien que no programa:
+Cubre las 9 suites (70 escenarios), escritas para que las lea alguien que no programa:
+acceso y roles, partidas, inscripciones, asistencia, gobernanza FOE, excedencias, jugadores,
+calendario y normas.
 
-- `features/c-inscripciones/` — plazo de 48 h, excedencias, equipación preseleccionada…
-- `features/e-gobernanza/` — expedientes de la Junta Directiva, recusación, cuórum y escalado de faltas.
-
-Los escenarios tienen los mismos códigos y nombres que en qa-playwright y qa-selenium
-(`TC-C01 …`), así que en la web se comparan herramientas caso a caso. Hay ejemplos de
-`Esquema del escenario` con `Ejemplos` (TC-C05/C06, TC-E04/E05) y de tabla de datos (TC-E01).
+Los escenarios tienen los mismos códigos y nombres que en qa-playwright, qa-selenium y
+qa-cypress (`TC-C01 …`), así que en la web se comparan herramientas caso a caso. Hay ejemplos de
+`Esquema del escenario` con `Ejemplos` (TC-C05/C06, TC-E04/E05), tablas de datos (TC-A01,
+TC-E01, TC-H03) y escenarios con varios usuarios (TC-B10/B11, TC-G01…).
 
 ```
 features/<suite>/*.feature     Gherkin en español
-src/steps/*.steps.ts           pasos (comunes, inscripciones, gobernanza)
+src/steps/*.steps.ts           pasos (app, comunes, inscripciones, gobernanza, calendario y normas)
 src/support/world.ts           navegador, login QA por nombre ("QA Junta 2")
 src/support/hooks.ts           reset por suite, captura JPEG y result.json común
 src/support/app-page.ts        page object (copia del de qa-playwright)
