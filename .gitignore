@@ -4,3 +4,4 @@ shared
 .env*
 result.json
 evidence/
+report
