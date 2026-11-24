@@ -2,7 +2,7 @@
 @f-excedencias
 Característica: Excedencias FOE
   Las solicita el jugador, las concede la Junta Directiva y nadie se concede la suya. Duran
-  entre 1 mes y 1 año (Art. 18 y 19). (Mismos casos que la suite F de qa-playwright y qa-selenium.)
+  entre 1 mes y 1 año (Art. 18 y 19).
 
   Escenario: TC-F01 Un jugador solicita una excedencia y queda pendiente de la Junta
     Dado que he iniciado sesión como "QA Jugador FOE"

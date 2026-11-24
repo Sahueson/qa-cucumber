@@ -3,7 +3,7 @@
 Característica: Ciclo de vida de las partidas
   Un admin crea, edita, cancela, reactiva y elimina las partidas de su equipo, y cierra el acta.
   Un acta cerrada solo se reabre si la aprueban los demás responsables del equipo.
-  (Mismos casos que la suite B de qa-playwright y qa-selenium.)
+
 
   Escenario: TC-B01 Crear partida valida los campos obligatorios
     Dado que he iniciado sesión como "QA Admin MAD"

@@ -3,7 +3,7 @@
 Característica: Normas del equipo (PDF en un bucket privado)
   Los admins publican los estatutos en PDF; se sirven con un enlace firmado y temporal, nunca
   por una URL pública, y al borrarlos desaparece también el fichero. Cada equipo solo ve los
-  suyos. (Mismos casos que la suite I de qa-playwright y qa-selenium.)
+  suyos.
 
   Escenario: TC-I01 Subir unos estatutos: se ven con enlace firmado y la URL pública no los sirve
     Dado que he iniciado sesión como "QA Admin FOE"

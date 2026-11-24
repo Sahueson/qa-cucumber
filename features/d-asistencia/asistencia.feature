@@ -3,7 +3,7 @@
 Característica: Motor de asistencia anual del FOE
   El % se calcula sobre las partidas computables FOE del año (seed: finalizada 1, pasada abierta 1
   y MilSim pasada 1,5 = 3,5). La MilSim pesa x1,5 y las partidas durante una excedencia aprobada
-  no restan (Art. 33 y 34). (Mismos casos que la suite D de qa-playwright y qa-selenium.)
+  no restan (Art. 33 y 34).
 
   Escenario: TC-D01 El % anual se calcula sobre las partidas ya jugadas
     Dado que he iniciado sesión como "QA Admin FOE"

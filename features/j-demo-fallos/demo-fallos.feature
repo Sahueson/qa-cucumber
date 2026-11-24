@@ -2,7 +2,7 @@
 @j-demo-fallos
 Característica: Demo de fallos
   Escenarios que FALLAN A PROPÓSITO (requisitos que la app no cumple) para enseñar cómo sale un fallo y su
-  reporte de bug. No modifican nada. Mismos casos que la suite J de qa-playwright y qa-selenium.
+  reporte de bug. No modifican nada.
 
   Escenario: TC-J01 El jugador MAD ve las partidas del equipo FOE (requisito inexistente)
     Dado que he iniciado sesión como "QA Jugador MAD"

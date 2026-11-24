@@ -2,7 +2,7 @@
 @g-jugadores
 Característica: Gestión de jugadores
   Solo el super admin cambia rol, bloqueo, equipos y órganos FOE de los jugadores; el efecto se
-  comprueba entrando con el jugador afectado. (Mismos casos que la suite G de qa-playwright y qa-selenium.)
+  comprueba entrando con el jugador afectado.
 
   Escenario: TC-G01 El super admin asciende a un jugador a admin y este gestiona partidas
     Dado que he iniciado sesión como "QA Super Admin"

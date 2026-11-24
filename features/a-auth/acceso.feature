@@ -2,8 +2,7 @@
 @a-auth
 Característica: Acceso y visibilidad por rol
   Cada usuario entra con su cuenta QA y solo ve lo que le corresponde: su equipo, su órgano de
-  la Junta, o nada si está bloqueado o no tiene equipo. (Mismos casos que la suite A de
-  qa-playwright y qa-selenium.)
+  la Junta, o nada si está bloqueado o no tiene equipo.
 
   Escenario: TC-SMOKE La app carga y muestra el login QA
     Dado que abro la app sin iniciar sesión

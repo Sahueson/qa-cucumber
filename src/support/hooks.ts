@@ -61,7 +61,7 @@ AfterAll(async () => {
 // Cada suite (carpeta de features/) parte del seed, igual que en Playwright y Selenium. La
 // reserva del staging ya la tiene with-staging.js (QA_LOCK_HELD=1): aquí solo se resetea.
 let lastSuite: string | null = null;
-Before(async function ({ pickle }) {
+Before({ name: "Dejar el staging como el seed (al empezar cada suite)" }, async function ({ pickle }) {
   const suite = path.basename(path.dirname(pickle.uri));
   if (suite !== lastSuite && process.env.STG_URL) {
     const { reset } = require(path.resolve(__dirname, "../../shared/reset-staging/reset.js"));
@@ -70,14 +70,14 @@ Before(async function ({ pickle }) {
   lastSuite = suite;
 });
 
-Before(async function (this: QaWorld) {
+Before({ name: "Abrir el navegador" }, async function (this: QaWorld) {
   (this as any).__start = Date.now();
   await this.open(browser);
 });
 
 // Captura JPEG al final de cada escenario (pase o falle): es la única evidencia que se publica,
 // nunca trazas ni logs, que llevan la contraseña QA y tokens.
-After(async function (this: QaWorld, { pickle, result }) {
+After({ name: "Captura final y cerrar el navegador" }, async function (this: QaWorld, { pickle, result }) {
   let evidence: string | null = null;
   try {
     const file = path.join(EVIDENCE_DIR, `${slug(pickle.name)}.jpg`);

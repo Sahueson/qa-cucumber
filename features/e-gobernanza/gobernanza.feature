@@ -4,7 +4,7 @@ Característica: Gobernanza y régimen disciplinario FOE
   La Junta Directiva (QA Super Admin, QA Admin FOE y QA Junta 2) vota las sanciones. El
   recuento, el cierre y el escalado de faltas los decide el servidor. El seed deja cada
   expediente a falta del voto de QA Junta 2, salvo el de recusación.
-  (Mismos casos que la suite E de qa-playwright y qa-selenium.)
+
 
   Escenario: TC-E01 La Junta Directiva abre un expediente sancionador
     Dado que he iniciado sesión como "QA Admin FOE"

@@ -3,7 +3,7 @@
 Característica: Inscripciones y reglas de negocio
   Como jugador quiero apuntarme a las partidas de mi equipo, con mi equipación y mi rol, sin
   saltarme las reglas: plazo de 48 h, excedencias, partidas finalizadas o canceladas.
-  (Mismos casos que la suite C de qa-playwright y qa-selenium.)
+
 
   Escenario: TC-C01 Inscribirse preselecciona la equipación de la partida y avisa si no la tienes
     # QA Junta 2 tiene Árido en su ficha; la partida recomienda Tiger Stripe.

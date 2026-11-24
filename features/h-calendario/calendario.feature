@@ -3,7 +3,7 @@
 Característica: Fechas sin partida en el calendario
   Un admin marca vacaciones o días de "No se juega" para su equipo (el super admin, también
   para ambos) y cada equipo solo ve las suyas. Seed: "QA · Sin partida FOE" (+25 a +26) y
-  "QA · Sin partida MAD" (+27). (Mismos casos que la suite H de qa-playwright y qa-selenium.)
+  "QA · Sin partida MAD" (+27).
 
   Escenario: TC-H01 Un admin marca fechas sin partida para su equipo
     Dado que he iniciado sesión como "QA Admin MAD"
