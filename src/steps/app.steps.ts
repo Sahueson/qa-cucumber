@@ -1,6 +1,7 @@
 import { Given, Then, When, type DataTable } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import { userByNickname, type QaWorld } from "../support/world";
+import { buttonText } from "../support/app-page";
 
 // Pasos generales de la app: acceso, navegación, partidas, fichas de jugador, excedencias,
 // calendario y normas. Lo específico de inscripciones y gobernanza está en sus ficheros.
@@ -67,7 +68,7 @@ When("abro la pestaña {string}", async function (this: QaWorld, tab: string) {
 });
 
 When("pulso {string}", async function (this: QaWorld, name: string) {
-  await this.page.getByRole("button", { name, exact: true }).click();
+  await buttonText(this.page, name).click();
 });
 
 When("recargo la página", async function (this: QaWorld) {
@@ -88,11 +89,11 @@ Then("no veo {string}", async function (this: QaWorld, text: string) {
 });
 
 Then("veo el botón {string}", async function (this: QaWorld, name: string) {
-  await expect(this.page.getByRole("button", { name, exact: true }).first()).toBeVisible();
+  await expect(buttonText(this.page, name).first()).toBeVisible();
 });
 
 Then("no veo el botón {string}", async function (this: QaWorld, name: string) {
-  await expect(this.page.getByRole("button", { name, exact: true })).toHaveCount(0);
+  await expect(buttonText(this.page, name)).toHaveCount(0);
 });
 
 // ---------- Mi ficha de operador ----------
@@ -143,15 +144,15 @@ Then("la lista no tiene partidas", async function (this: QaWorld) {
 
 When("pulso {string} en la partida {string}", async function (this: QaWorld, name: string, title: string) {
   await this.app.openTab("Partidas");
-  await this.app.eventCard(title).getByRole("button", { name, exact: true }).click();
+  await buttonText(this.app.eventCard(title), name).click();
 });
 
 Then("la partida {string} muestra el botón {string}", async function (this: QaWorld, title: string, name: string) {
-  await expect(this.app.eventCard(title).getByRole("button", { name, exact: true })).toBeVisible();
+  await expect(buttonText(this.app.eventCard(title), name)).toBeVisible();
 });
 
 Then("la partida {string} no muestra el botón {string}", async function (this: QaWorld, title: string, name: string) {
-  await expect(this.app.eventCard(title).getByRole("button", { name, exact: true })).toHaveCount(0);
+  await expect(buttonText(this.app.eventCard(title), name)).toHaveCount(0);
 });
 
 Then("en la lista está la partida {string}", async function (this: QaWorld, title: string) {
@@ -193,7 +194,7 @@ When("escribo el campo de juego {string}", async function (this: QaWorld, field:
 });
 
 When("pulso {string} en el formulario", async function (this: QaWorld, name: string) {
-  await openForm(this).getByRole("button", { name, exact: true }).click();
+  await buttonText(openForm(this), name).click();
 });
 
 Then("el formulario avisa {string}", async function (this: QaWorld, text: string) {
@@ -268,22 +269,23 @@ Then("la asistencia de {string} sigue desmarcada", async function (this: QaWorld
 
 // ---------- Fichas de jugador (pestaña Jugadores) ----------
 
+// El aria-label de los desplegables de la ficha lleva el nombre del jugador: se localizan por data-testid.
 const roleSelect = (w: QaWorld, nickname: string) =>
-  w.app.playerCard(nickname).locator("select").filter({ has: w.page.locator('option[value="super_admin"]') });
+  w.app.playerCard(nickname).locator('[data-testid^="roster-app-role-select-"]');
 
 When("cambio el rol de {string} a {string}", async function (this: QaWorld, nickname: string, role: string) {
   await this.app.openTab("Jugadores");
-  await roleSelect(this, nickname).selectOption(role);
+  await this.app.chooseOption(roleSelect(this, nickname), role);
 });
 
 When("pulso {string} en la ficha de {string}", async function (this: QaWorld, name: string, nickname: string) {
   await this.app.openTab("Jugadores");
-  await this.app.playerCard(nickname).getByRole("button", { name, exact: true }).click();
+  await buttonText(this.app.playerCard(nickname), name).click();
 });
 
 When("asigno el equipo {string} a {string}", async function (this: QaWorld, squad: string, nickname: string) {
   await this.app.openTab("Jugadores");
-  await this.app.playerCard(nickname).locator("select").filter({ hasText: "+ Añadir otro equipo" }).selectOption(squad);
+  await this.app.chooseOption(this.app.playerCard(nickname).locator('[data-testid^="roster-add-squad-select-"]'), squad);
 });
 
 Then("veo la ficha de {string}", async function (this: QaWorld, nickname: string) {
@@ -296,11 +298,11 @@ Then("no veo la ficha de {string}", async function (this: QaWorld, nickname: str
 });
 
 Then("la ficha de {string} muestra el botón {string}", async function (this: QaWorld, nickname: string, name: string) {
-  await expect(this.app.playerCard(nickname).getByRole("button", { name, exact: true })).toBeVisible();
+  await expect(buttonText(this.app.playerCard(nickname), name)).toBeVisible();
 });
 
 Then("la ficha de {string} no muestra el botón {string}", async function (this: QaWorld, nickname: string, name: string) {
-  await expect(this.app.playerCard(nickname).getByRole("button", { name, exact: true })).toHaveCount(0);
+  await expect(buttonText(this.app.playerCard(nickname), name)).toHaveCount(0);
 });
 
 Then("la ficha de {string} muestra {string}", async function (this: QaWorld, nickname: string, text: string) {

@@ -21,7 +21,7 @@ Característica: Inscripciones y reglas de negocio
     Dado que he iniciado sesión como "QA Junta 2"
     Cuando abro la partida "QA FOE · MilSim próxima"
     Entonces la equipación preseleccionada es "Árido"
-    Y el rol preseleccionado es "medico"
+    Y el rol preseleccionado es "Médico"
     Y no veo ningún aviso de equipación
 
   Escenario: TC-C04 Darse de baja a más de 48 h libera la plaza

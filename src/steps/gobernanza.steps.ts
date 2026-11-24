@@ -1,6 +1,7 @@
 import { Then, When, type DataTable } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import type { QaWorld } from "../support/world";
+import { buttonText } from "../support/app-page";
 
 // Suite E · Gobernanza FOE: votaciones y expedientes de la Junta Directiva.
 
@@ -15,10 +16,9 @@ When("convoco una votación de sanción con estos datos:", async function (this:
   const page = this.app.page;
   await page.getByRole("button", { name: "+ Nueva votación" }).click();
   const form = page.locator("form").filter({ hasText: "Convocar votación en Junta Directiva" });
-  const select = (option: string) => form.locator("select", { has: page.locator("option", { hasText: option }) });
-  await select("Votación de sanción a operador").selectOption({ label: "Votación de sanción a operador" });
-  await select(data.operador).selectOption({ label: data.operador });
-  await select(data.gravedad).selectOption({ label: data.gravedad });
+  await this.app.chooseOption(form.getByTestId("foe-poll-topic-select"), "Votación de sanción a operador");
+  await this.app.chooseOption(form.getByTestId("foe-sanction-target-select"), data.operador);
+  await this.app.chooseOption(form.getByTestId("foe-sanction-severity-select"), data.gravedad);
   await form.getByPlaceholder(/Art\. 51\.i/).fill(data["artículo"]);
   await form.getByPlaceholder(/Explica los hechos/).fill(data.hechos);
   await form.getByRole("button", { name: "Publicar votación" }).click();
@@ -29,7 +29,7 @@ When("voto {string} en el expediente {string}", async function (this: QaWorld, o
 });
 
 When("pulso {string} en el expediente {string}", async function (this: QaWorld, name: string, title: string) {
-  await this.app.pollCard(title).getByRole("button", { name, exact: true }).click();
+  await buttonText(this.app.pollCard(title), name).click();
 });
 
 Then("el expediente {string} muestra {string}", async function (this: QaWorld, title: string, text: string) {
@@ -48,5 +48,5 @@ Then("no puedo votar en el expediente {string}", async function (this: QaWorld, 
 });
 
 Then("no veo el botón {string} en el expediente {string}", async function (this: QaWorld, name: string, title: string) {
-  await expect(this.app.pollCard(title).getByRole("button", { name, exact: true })).toBeHidden();
+  await expect(buttonText(this.app.pollCard(title), name)).toBeHidden();
 });

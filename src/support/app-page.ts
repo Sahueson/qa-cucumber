@@ -14,8 +14,8 @@ export class AppPage {
   constructor(readonly page: Page) {
     this.nav = page.getByRole("navigation", { name: "Navegación principal" });
     this.newEventButton = page.getByRole("button", { name: "+ Nueva partida" });
-    this.logoutButton = page.locator(".app-header").getByRole("button", { name: "Salir" });
-    this.profileButton = page.getByTitle("Editar mi ficha de operador");
+    this.logoutButton = page.locator(".app-header").getByTestId("header-logout-btn");
+    this.profileButton = page.locator(".app-header").getByTestId("header-profile-btn");
     this.toast = page.locator(".tactical-toast");
     this.modal = page.locator(".modal");
   }
@@ -136,13 +136,34 @@ export class AppPage {
 
   // Formulario de inscripción del detalle de partida.
   get registrationGear() {
-    return this.modal.locator(".inscribir-form select").nth(0);
+    return this.modal.getByTestId("event-register-team-select");
   }
   get registrationRole() {
-    return this.modal.locator(".inscribir-form select").nth(1);
+    return this.modal.getByTestId("event-register-role-select");
+  }
+
+  // Desplegables propios (TacticalSelect): la lista solo existe con el menú abierto.
+  async chooseOption(trigger: Locator, option: string) {
+    await trigger.click();
+    await this.page.getByRole("listbox").getByRole("option").filter({ hasText: option }).first().click();
+  }
+
+  // Textos de las opciones de un desplegable: lo abre, los lee y lo cierra sin elegir.
+  async dropdownOptions(trigger: Locator) {
+    await trigger.click();
+    const options = this.page.getByRole("listbox").getByRole("option");
+    await expect(options.first()).toBeVisible();
+    const texts = (await options.allInnerTexts()).map((t) => t.trim());
+    await trigger.click();
+    return texts;
   }
 
   async expectToast(text: string | RegExp) {
     await expect(this.toast.filter({ hasText: text })).toBeVisible();
   }
 }
+
+/** Botón por su texto visible. El nombre accesible (aria-label) de los botones de tarjetas y fichas lleva el título o el nickname, así que no se usa. */
+const escapeRegex = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+export const buttonText = (scope: Locator | Page, name: string) =>
+  scope.getByRole("button").filter({ hasText: new RegExp(`^\\s*${escapeRegex(name)}\\s*$`) });

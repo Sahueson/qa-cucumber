@@ -1,6 +1,7 @@
 import { Given, Then, When } from "@cucumber/cucumber";
 import { expect } from "@playwright/test";
 import type { QaWorld } from "../support/world";
+import { buttonText } from "../support/app-page";
 
 // Suite H (fechas sin partida del calendario) y suite I (PDF de Normas en el bucket privado).
 
@@ -50,7 +51,7 @@ Then("el formulario de fechas sin partida se cierra", async function (this: QaWo
 });
 
 Then("el equipo afectado solo puede ser:", async function (this: QaWorld, table) {
-  await expect(blackoutForm(this).locator("select option")).toHaveText(table.raw().map((r: string[]) => r[0]));
+  expect(await this.app.dropdownOptions(blackoutForm(this).getByTestId("blackout-squad-select"))).toEqual(table.raw().map((r: string[]) => r[0]));
 });
 
 Then("en el calendario veo la fecha sin partida {string}", async function (this: QaWorld, reason: string) {
@@ -127,7 +128,7 @@ When("escribo el título de documento {string}", async function (this: QaWorld, 
 });
 
 When("pulso {string} en el formulario del PDF", async function (this: QaWorld, name: string) {
-  await uploadForm(this).getByRole("button", { name, exact: true }).click();
+  await buttonText(uploadForm(this), name).click();
 });
 
 Then("el formulario del PDF avisa {string}", async function (this: QaWorld, text: string) {
