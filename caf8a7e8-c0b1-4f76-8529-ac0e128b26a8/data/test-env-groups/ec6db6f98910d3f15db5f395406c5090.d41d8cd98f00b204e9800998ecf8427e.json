@@ -1,0 +1,1 @@
+{"id":"ec6db6f98910d3f15db5f395406c5090.d41d8cd98f00b204e9800998ecf8427e","fullName":"qa-cucumber:features/g-jugadores/jugadores.feature#TC-G05 Un admin que no es super admin no puede cambiar permisos","name":"TC-G05 Un admin que no es super admin no puede cambiar permisos","status":"passed","testResultsByEnv":{"default":"4daf9bcde6b0da325cbea29bfef9a659"}}

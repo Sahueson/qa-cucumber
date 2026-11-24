@@ -1,0 +1,3 @@
+caso,estado,partida,aviso
+TC-C05,ya finalizada,QA FOE · Partida pasada abierta,ya ha finalizado; las inscripciones y bajas están cerradas
+TC-C06,cancelada,QA FOE · Partida cancelada,está cancelada; no se permiten inscripciones

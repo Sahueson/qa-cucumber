@@ -1,0 +1,1 @@
+{"id":"51a067a37292fd67350d19e031a669e9.d41d8cd98f00b204e9800998ecf8427e","fullName":"qa-cucumber:features/g-jugadores/jugadores.feature#TC-G06 El super admin no puede cambiarse el rol ni bloquearse a sí mismo","name":"TC-G06 El super admin no puede cambiarse el rol ni bloquearse a sí mismo","status":"passed","testResultsByEnv":{"default":"f3217a29dc2526052d9e751c3e1c382c"}}

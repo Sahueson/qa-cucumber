@@ -1,0 +1,1 @@
+{"id":"95a158567e0e6bd7ec708e6258ebfef5.d41d8cd98f00b204e9800998ecf8427e","fullName":"qa-cucumber:features/g-jugadores/jugadores.feature#TC-G03 Asignar equipo a un jugador sin equipo le da acceso a ese equipo","name":"TC-G03 Asignar equipo a un jugador sin equipo le da acceso a ese equipo","status":"passed","testResultsByEnv":{"default":"2bbbdf7e514d8506b1a936043b9b98ee"}}
