@@ -81,8 +81,9 @@ After(async function (this: QaWorld, { pickle, result }) {
   let evidence: string | null = null;
   try {
     const file = path.join(EVIDENCE_DIR, `${slug(pickle.name)}.jpg`);
-    await this.page.screenshot({ path: file, type: "jpeg", quality: 60 });
+    const shot = await this.page.screenshot({ path: file, type: "jpeg", quality: 60 });
     evidence = file;
+    await this.attach(shot, "image/jpeg"); // Allure la enseña en el escenario
   } catch {
     // sin captura (p. ej. el navegador ya se cerró)
   }

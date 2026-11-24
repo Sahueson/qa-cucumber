@@ -77,6 +77,10 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
+          # Allure (pasos de Gherkin + capturas). Si no hay resultados, make-report.js genera el informe sencillo.
+          if [ -d allure-results ]; then
+            npx --yes allure@3 generate allure-results -o report --name "Informe de Cucumber" || rm -rf report
+          fi
           node shared/make-report.js result.json report "Informe de Cucumber"
           node shared/mask-report.js report
 
