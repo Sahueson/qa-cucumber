@@ -1,0 +1,1 @@
+{"id":"095cbde1edc4810d5035ec21746a161f.d41d8cd98f00b204e9800998ecf8427e","fullName":"qa-cucumber:features/a-auth/acceso.feature#TC-A04 Contraseña incorrecta muestra error y no entra","name":"TC-A04 Contraseña incorrecta muestra error y no entra","status":"passed","testResultsByEnv":{"default":"3e868220fe2263288580cdcf3b47d5b1"}}
