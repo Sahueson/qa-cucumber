@@ -4,6 +4,10 @@ import * as fs from "fs";
 import * as path from "path";
 import type { QaWorld } from "./world";
 
+// Eventos para la pantalla en vivo de la web (no hacen nada sin RUN_ID).
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const live = require(path.resolve(__dirname, "../../shared/live-events.js"));
+
 // Un navegador para toda la ejecución y un contexto (sesión limpia) por escenario.
 let browser: Browser;
 const startedAt = new Date();
@@ -56,6 +60,7 @@ BeforeAll(async () => {
 
 AfterAll(async () => {
   await browser?.close();
+  await live.flush();
 });
 
 // Cada suite (carpeta de features/) parte del seed, igual que en Playwright y Selenium. La
@@ -70,8 +75,9 @@ Before({ name: "Dejar el staging como el seed (al empezar cada suite)" }, async 
   lastSuite = suite;
 });
 
-Before({ name: "Abrir el navegador" }, async function (this: QaWorld) {
+Before({ name: "Abrir el navegador" }, async function (this: QaWorld, { pickle }) {
   (this as any).__start = Date.now();
+  live.emit("test_started", pickle.name);
   await this.open(browser);
 });
 
@@ -100,4 +106,7 @@ After({ name: "Captura final y cerrar el navegador" }, async function (this: QaW
     evidence_path: evidence,
   });
   writeResults();
+  live.emit(status === "failed" ? "test_failed" : status === "skipped" ? "test_skipped" : "test_passed", pickle.name);
+  const err = results[results.length - 1].error;
+  if (err) live.emit("log", `   ↳ ${err}`);
 });

@@ -5,7 +5,7 @@ module.exports = {
     requireModule: ["tsx/cjs"],
     require: ["src/support/**/*.ts", "src/steps/**/*.ts"],
     // allure-results: lo lee Allure para el informe (pasos de Gherkin + captura final).
-    format: ["progress", "allure-cucumberjs/reporter"],
+    format: ["progress", "allure-cucumberjs/reporter", "./src/support/live-formatter.cjs"],
     formatOptions: { resultsDir: "allure-results" },
     publishQuiet: true,
   },
